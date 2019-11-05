@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutNewComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/layout_border"
+    android:backgroundTint="#F5EBD3"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/etTextNewComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserNameNewComment"
+        android:layout_marginEnd="30dp"
+        android:layout_toStartOf="@+id/ivMealNewComment"
+        android:hint="@string/write_down_your_experiences"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/ivMealNewComment"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/layout_border"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_add_a_photo" />
+
+    <Button
+        android:id="@+id/btnSendComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivMealNewComment"
+        android:layout_marginTop="24dp"
+        android:text="@string/send" />
+
+
+    <TextView
+        android:id="@+id/tvUserNameNewComment"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Kovacs Jeno"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCancelNewComment"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_cancel"
+        tools:visibility="visible" />
+
+</RelativeLayout>

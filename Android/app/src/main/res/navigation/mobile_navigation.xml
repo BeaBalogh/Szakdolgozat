@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/nav_recipe_list">
+
+    <fragment
+        android:id="@+id/nav_recipe_list"
+        android:name="hu.bme.aut.android.ui.fragment.RecipeListFragment"
+        android:label="@string/title_recipe_list"
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_nav_home_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+    <fragment
+    android:id="@+id/nav_favorites_list"
+    android:name="hu.bme.aut.android.ui.fragment.RecipeListFragment"
+    android:label="@string/favorites"
+    tools:layout="@layout/fragment_recipe_list">
+        <action
+        android:id="@+id/action_nav_favorites_list_to_nav_my_recipe_details"
+        app:destination="@id/nav_my_recipe_details" />
+        <action
+            android:id="@+id/action_nav_favorites_list_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_myrecipe_list"
+        android:name="hu.bme.aut.android.ui.fragment.RecipeListFragment"
+        android:label="@string/my_recipes"
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_nav_myrecipe_list_to_nav_my_recipe_details"
+            app:destination="@id/nav_my_recipe_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_cooked_list"
+        android:name="hu.bme.aut.android.ui.fragment.RecipeListFragment"
+        android:label="@string/cooked_recipes"
+        tools:layout="@layout/fragment_recipe_list">
+        <action
+            android:id="@+id/action_nav_cooked_list_to_nav_my_recipe_details"
+            app:destination="@id/nav_my_recipe_details" />
+        <action
+            android:id="@+id/action_nav_cooked_list_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="hu.bme.aut.android.ui.fragment.RecipeDetailFragment"
+        android:label="{recipeName}"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeID"
+            app:argType="string" />
+        <argument
+            android:name="recipeName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_new_recipe"
+        android:name="hu.bme.aut.android.ui.fragment.NewRecipeFragment"
+        android:label="@string/add_new_recipe"
+        tools:layout="@layout/fragment_new_recipe"/>
+    <fragment
+        android:id="@+id/nav_my_recipe_details"
+        android:name="hu.bme.aut.android.ui.fragment.DirectionsFragment"
+        android:label="{recipeName}">
+        <argument
+            android:name="recipeID"
+            app:argType="string" />
+        <argument
+            android:name="recipeName"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
