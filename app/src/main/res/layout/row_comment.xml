@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/layout_border"
+    android:backgroundTint="#D6CECB"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvUserNameNewComment"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:text="Kovacs Jeno"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ivMealNewComment"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/tvTextComment"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tvTextComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserNameNewComment"
+        android:layout_marginEnd="0dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvDateComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvTextComment"
+        android:layout_alignTop="@+id/tvUserNameNewComment"
+        android:layout_alignParentEnd="true"
+        android:text="2019.10.21. 13:22" />
+
+</RelativeLayout>

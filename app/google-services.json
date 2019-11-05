@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "116520956553",
+    "firebase_url": "https://bme-szakdolgozat-recipes.firebaseio.com",
+    "project_id": "bme-szakdolgozat-recipes",
+    "storage_bucket": "bme-szakdolgozat-recipes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116520956553:android:5c8f570dac748510798c58",
+        "android_client_info": {
+          "package_name": "hu.bme.aut.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116520956553-gmi78agdlna796534ccsqf046ld7aesl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hu.bme.aut.android",
+            "certificate_hash": "a4b07db7dfc4cd13e19c9ecbb2e4af53ca0bd550"
+          }
+        },
+        {
+          "client_id": "116520956553-pq00dcita8t3ab1ea52kh53fg2glq7mq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS_9-ayvt-aUpr4rJRkZSNmpaz1eraPvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116520956553-pq00dcita8t3ab1ea52kh53fg2glq7mq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
