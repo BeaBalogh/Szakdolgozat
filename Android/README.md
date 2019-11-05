@@ -1,1 +1,1 @@
-# Szakdolgozat - Androidos projekt
+# Szakdolgozat - RecipeBook - Android
