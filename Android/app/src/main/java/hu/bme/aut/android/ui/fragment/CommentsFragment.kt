@@ -46,6 +46,7 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
     private lateinit var btnSend: Button
     private lateinit var btnCancel: Button
     private lateinit var newComment: RelativeLayout
+    private lateinit var ratingBar: RatingBar
     private var id = ""
     private var userName = ""
     private var commentText = ""
@@ -107,10 +108,12 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
         etCommentText = rootView.findViewById(R.id.etTextNewComment)
         (rootView.findViewById(R.id.tvUserNameNewComment) as TextView).text = userName
         newComment = rootView.findViewById(R.id.layoutNewComment)
+        ratingBar= rootView.findViewById(R.id.rbNewComment)
 
         if (savedInstanceState != null) {
             fileUri = savedInstanceState.getString("fileUri", null).toUri()
             imageView.setImageURI(fileUri)
+            savedInstanceState.remove("fileUri")
         }
 
         for (child in newComment.children) {
@@ -150,7 +153,8 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
             userName = userName,
             imgURL = imageName,
             date = currentDate,
-            text = commentText
+            text = commentText,
+            rating = ratingBar.rating
         )
         recipeService.uploadComment(comment, id, fileUri).addOnSuccessListener {
 
@@ -171,7 +175,7 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
     private fun loadComment(commentID: String) {
         if (MainActivity.isNetworkAvailable) {
             recipeService.loadComment(id, commentID).addOnSuccessListener { document ->
-                val comment = docToComment(document)
+                val comment =document.toObject(Comment::class.java)
                 commentsAdapter.addComment(comment)
             }
         }
@@ -181,21 +185,11 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
     private fun loadComments() {
         recipeService.loadComments(id).addOnSuccessListener { documents ->
             for (document in documents) {
-                val comment = docToComment(document)
+                val comment = document.toObject(Comment::class.java)
                 commentsAdapter.addComment(comment)
                 viewModelShared.addComment(comment)
             }
         }
-    }
-
-    private fun docToComment(document: DocumentSnapshot): Comment {
-        return Comment(
-            id = document.id,
-            userName = document.data!!["userName"] as String,
-            text = document.data!!["text"] as String,
-            imgURL = document.data!!["imgURL"] as String,
-            date = document.data!!["date"] as String
-        )
     }
 
 

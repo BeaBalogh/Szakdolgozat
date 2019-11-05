@@ -1,6 +1,7 @@
 package hu.bme.aut.android.ui.fragment
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 
 class RecipeListFragment : Fragment(), RecipesAdapter.RecipeItemClickListener,
     SwipeRefreshLayout.OnRefreshListener {
+
 
     private lateinit var adapter: RecipesAdapter
     private lateinit var title: String

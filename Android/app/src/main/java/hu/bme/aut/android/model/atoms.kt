@@ -28,7 +28,8 @@ data class Comment(
     val userName: String = "",
     val text: String = "",
     val imgURL: String = "",
-    val date: String = ""
+    val date: String = "",
+    val rating: Float = 0.toFloat()
 )
 
 data class User(

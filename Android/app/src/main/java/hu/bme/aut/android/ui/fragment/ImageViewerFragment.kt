@@ -12,8 +12,6 @@ import android.widget.ImageView
 import hu.bme.aut.android.R
 
 
-
-
 class ImageViewerFragment : DialogFragment() {
 
     private var bitmapimage: Bitmap? = null
@@ -34,7 +32,6 @@ class ImageViewerFragment : DialogFragment() {
         super.onCreate(savedInstanceState)
         bitmapimage = arguments?.getParcelable("BitmapImage")
 
-
         val style = STYLE_NORMAL
         val theme = 0
         setStyle(style, theme)
@@ -48,7 +45,9 @@ class ImageViewerFragment : DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val rootView = inflater.inflate(R.layout.fragment_image_viewer, container, false)
         val imageView = (rootView.findViewById(R.id.imageViewer) as ImageView)
-        imageView.setImageBitmap(bitmapimage)
+
+        if (bitmapimage != null)
+            imageView.setImageBitmap(bitmapimage)
         return rootView
     }
 

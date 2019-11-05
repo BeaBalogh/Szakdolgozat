@@ -80,12 +80,6 @@ class RecipeService {
         if (fileUri != null) {
             upload = uploadImage(fileUri, comment.imgURL)
         }
-        val commentToUpload = hashMapOf(
-            "userName" to comment.userName,
-            "date" to comment.date,
-            "text" to comment.text,
-            "imgURL" to comment.imgURL
-        )
         if (upload != null) {
             while (!upload.isComplete) {
                 Thread.sleep(10)
@@ -93,7 +87,7 @@ class RecipeService {
         }
         return db.collection("recipes").document(recipeId)
             .collection("comments")
-            .add(commentToUpload)
+            .add(comment)
 
     }
 

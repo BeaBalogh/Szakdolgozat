@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/tvUserNameNewComment"
-        android:layout_width="162dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Kovacs Jeno"
         android:textSize="16sp"
@@ -19,16 +19,18 @@
         android:id="@+id/ivMealNewComment"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_below="@+id/tvTextComment"
-        android:layout_marginTop="10dp"
-        android:visibility="gone" />
+        android:layout_below="@+id/tvDateComment"
+        android:layout_alignEnd="@+id/tvDateComment"
+        android:layout_marginTop="8dp"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/tvTextComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingBar"
-        android:layout_marginEnd="0dp"
+        android:layout_below="@+id/tvUserNameNewComment"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/ivMealNewComment"
         android:text="TextView" />
 
     <TextView
@@ -45,8 +47,12 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvUserNameNewComment"
-        android:layout_alignStart="@+id/tvUserNameNewComment"
+        android:layout_alignTop="@+id/tvUserNameNewComment"
+        android:layout_alignBottom="@+id/tvUserNameNewComment"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toEndOf="@+id/tvUserNameNewComment"
         android:isIndicator="true"
         android:numStars="5"
         android:progressTint="#FFD54F"

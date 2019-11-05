@@ -1,6 +1,8 @@
 package hu.bme.aut.android.ui.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -36,8 +38,7 @@ class RecipesAdapter(private val context: Context) :
                 Glide.with(context)
                     .load(recipe.imgURL)
                     .into(holder.image)
-            }
-            else{
+            } else {
                 RecipeService().getImage(recipe.imgURL).addOnSuccessListener {
                     Glide.with(context)
                         .load(it)

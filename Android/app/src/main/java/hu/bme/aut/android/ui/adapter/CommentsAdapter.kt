@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,9 @@ import com.google.firebase.storage.FirebaseStorage
 import hu.bme.aut.android.R
 import hu.bme.aut.android.model.Comment
 import kotlinx.android.synthetic.main.row_comment.view.*
+import kotlinx.android.synthetic.main.row_comment.view.ivMealNewComment
+import kotlinx.android.synthetic.main.row_comment.view.tvUserNameNewComment
+import kotlinx.android.synthetic.main.view_new_comment.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,6 +53,7 @@ class CommentsAdapter(context: Context) :
         holder.name.text = comment.userName
         holder.text.text = comment.text
         holder.date.text = comment.date
+        holder.rating.rating = comment.rating
 
 
     }
@@ -78,6 +83,7 @@ class CommentsAdapter(context: Context) :
         val image: ImageView = view.ivMealNewComment
         val text: TextView = view.tvTextComment
         val date: TextView = view.tvDateComment
+        val rating: RatingBar = view.ratingBar
 
     }
 
