@@ -146,6 +146,7 @@ PODS:
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - Protobuf (3.10.0)
+  - ReachabilitySwift (5.0.0)
   - SideMenuSwift (2.0.3)
 
 DEPENDENCIES:
@@ -159,6 +160,7 @@ DEPENDENCIES:
   - HCSStarRatingView (~> 1.5)
   - JJFloatingActionButton
   - PopupDialog (~> 1.1)
+  - ReachabilitySwift
   - SideMenuSwift
 
 SPEC REPOS:
@@ -192,6 +194,7 @@ SPEC REPOS:
     - nanopb
     - PopupDialog
     - Protobuf
+    - ReachabilitySwift
     - SideMenuSwift
 
 SPEC CHECKSUMS:
@@ -224,8 +227,9 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SideMenuSwift: 5c2b1496544ce3f1f08f4dddf4810eaac49f543d
 
-PODFILE CHECKSUM: 06af3e73a8dd7fa6dfef92000bb0fa3998856f59
+PODFILE CHECKSUM: 5395403ce320349f41980182d74ae6a104f2f0ec
 
 COCOAPODS: 1.8.4

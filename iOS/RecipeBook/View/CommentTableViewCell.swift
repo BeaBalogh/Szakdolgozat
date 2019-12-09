@@ -14,7 +14,9 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var ratingbarView: HCSStarRatingView!
     @IBOutlet weak var commentTextView: UITextView!
-    @IBOutlet weak var mealImageView: UIImageView!
+    @IBOutlet weak var commentImageView: ContentSizedImageView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

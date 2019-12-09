@@ -56,7 +56,6 @@ class RecipeInteractor {
         runCallOnBackgroundThread(getRecipeRequest, onSuccess)
     }
 
-    //    Lookup a random meal
     fun random(
         onSuccess: (List<Recipe>) -> Unit
     ) {

@@ -9,14 +9,31 @@
 import UIKit
 
 class DetailsTabViewController: UITabBarController {
-
-    var recipe:Recipe = Recipe()
+    let model = RecipesModel.shared
+    var recipe:Recipe = Recipe("")
+    @IBOutlet weak var favButton: UIBarButtonItem!
+    @IBAction func addFavs(_ sender: Any) {
+        model.addOrRemoveFavorite(id: recipe.id)
+        if( model.isFavorite(id: recipe.id)){
+            favButton.image = #imageLiteral(resourceName: "icons8-heart-30")
+        } else {
+            favButton.image = #imageLiteral(resourceName: "icons8-heart-outline-30")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = recipe.name
-        // Do any additional setup after loading the view.
-    }
+        FirebaseService.shared.loadComments(id: recipe.id) { (comments, error) in
+            if(error == nil){
+                self.recipe.comments = comments
+            }
+        }
+        if( model.isFavorite(id: recipe.id)){
+            favButton.image = #imageLiteral(resourceName: "icons8-heart-90")
+        } else {
+            favButton.image = #imageLiteral(resourceName: "icons8-heart-outline-30")
+        }    }
     
 
     /*

@@ -98,9 +98,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             return
         }
         showProgressDialog()
+        signInWithGoogle(etEmail.text.toString(), etPassword.text.toString())
 
+    }
+    private fun signInWithGoogle(email: String, password: String){
         firebaseAuth
-            .signInWithEmailAndPassword(etEmail.text.toString(), etPassword.text.toString())
+            .signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 hideProgressDialog()
 
@@ -138,6 +141,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 firebaseUser?.updateProfile(profileChangeRequest)
 
                 toast("Registration successful")
+                signInWithGoogle(etEmail.text.toString(), etPassword.text.toString())
             }
             .addOnFailureListener { exception ->
                 hideProgressDialog()

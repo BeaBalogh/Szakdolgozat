@@ -12,11 +12,14 @@ import GoogleSignIn
 import SideMenuSwift
 
 private let reuseIdentifier = "RecipeCell"
-private var dataSource: [Recipe] = [recipe, recipe2, recipe2, recipe3, recipe,recipe, recipe2, recipe2, recipe3, recipe]
 
 
 
-class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
+class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UIGestureRecognizerDelegate{
+    
+    let model = RecipesModel.shared
+    var observers = [NSKeyValueObservation]()
+    var dataSource: [Recipe] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func logoutAction(_ sender: Any) {logout()}
@@ -30,12 +33,31 @@ class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewData
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        observeModel()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        collectionView.addGestureRecognizer(longPressGesture)
         
     }
+    
+    func observeModel() {
+      
+    }
+    @objc func handleLongPress(longPressGesture: UILongPressGestureRecognizer) {
+        let p = longPressGesture.location(in: self.collectionView)
+        let indexPath = self.collectionView.indexPathForItem(at: p)
+        if indexPath == nil {
+            print("Long press on table view, not row.")
+        } else if longPressGesture.state == UIGestureRecognizer.State.began {
+            print("Long press on row, at \(indexPath!.row)")
+            showAlert(recipe: dataSource[(indexPath?.item)!])
+        }
+    }
+    
     //     MARK: actions
     func refreashControlAction(){
         self.collectionView?.reloadData()
@@ -72,7 +94,18 @@ class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewData
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    func showAlert(recipe: Recipe){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Remove \(recipe.name)", style: .default, handler: { _ in
+            self.dataSource.removeAll(where: { (item) -> Bool in
+                return recipe.id == item.id
+            })
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
     
@@ -107,6 +140,12 @@ class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewData
     
         cell.nameLabel.text = recipe.name
         cell.categoryLabel.text = recipe.category
+        if(recipe.image == nil)
+        {
+            cell.mealImage.image = #imageLiteral(resourceName: "placeholder")
+        }else{
+            cell.mealImage.image = UIImage(data: recipe.image!)
+        }
         
         return cell
     }

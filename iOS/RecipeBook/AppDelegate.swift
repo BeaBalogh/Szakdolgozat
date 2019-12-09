@@ -15,6 +15,9 @@ import UserNotifications
 @UIApplicationMain
  class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
+    let userDefault = UserDefaults.standard
+    let launchedBefore = UserDefaults.standard.bool(forKey: "usersignedin")
+    
     var window: UIWindow?
 
     // Local notifications
@@ -38,15 +41,25 @@ import UserNotifications
             print(error)
             return
         }
-
+        
         guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+        var credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
+        
+        if let id = userDefault.string(forKey: "tokenId"),
+            let access = userDefault.string(forKey: "accessToken"){
+            credential = GoogleAuthProvider.credential(withIDToken: id,
+                                                           accessToken: access)
+        }
+    
         Auth.auth().signIn(with: credential) { (authResult, error) in
             if let error = error {
                 print(error)
                 return
             }
+            self.userDefault.set(authentication.idToken, forKey: "idToken")
+            self.userDefault.set(authentication.accessToken, forKey: "accessToken")
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "RecipesNav") as! UINavigationController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -62,7 +75,7 @@ import UserNotifications
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        
+    
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
 
@@ -83,7 +96,7 @@ import UserNotifications
         SideMenuController.preferences.basic.menuWidth = 240
         SideMenuController.preferences.basic.defaultCacheKey = "0"
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -107,5 +120,6 @@ import UserNotifications
     }
 
 
+    
 }
 

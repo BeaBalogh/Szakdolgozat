@@ -16,5 +16,5 @@ target 'RecipeBook' do
   pod 'GrowingTextView', '0.7.1'
   pod 'SideMenuSwift'
   pod 'JJFloatingActionButton'
-  pod 'PopupDialog', '~> 1.1'
+  pod 'ReachabilitySwift'
 end

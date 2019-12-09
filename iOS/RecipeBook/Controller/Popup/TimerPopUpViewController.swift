@@ -25,7 +25,7 @@ class TimerPopUpViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func leftButtonTapped(_ sender: Any) {
-        if (CountdownTimer.timer.isFinished) {
+        if (CountdownTimer.shared.isFinished) {
             dismiss(animated: true, completion: nil)
         }
         else {
@@ -33,11 +33,11 @@ class TimerPopUpViewController: UIViewController {
         }
     }
     @IBAction func rightButtonTapped(_ sender: Any) {
-        if (CountdownTimer.timer.isPaused) {
-            if(CountdownTimer.timer.isFinished){
+        if (CountdownTimer.shared.isPaused) {
+            if(CountdownTimer.shared.isFinished){
                 let time = Int(timePicker.countDownDuration)
                 updateLabels()
-                CountdownTimer.timer.setTime(sec: time )
+                CountdownTimer.shared.setTime(sec: time )
             }
             start()
         }
@@ -49,20 +49,20 @@ class TimerPopUpViewController: UIViewController {
     //MARK: ViewController overrides
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationHelper.notiHelper.sendNotification(request: runningRequest())
-        NotificationHelper.notiHelper.sendNotification(request: expiredRequest())
+        NotificationService.shared.sendNotification(request: runningRequest())
+        NotificationService.shared.sendNotification(request: expiredRequest())
     }
     override func viewWillAppear(_ animated: Bool) {
-        NotificationHelper.notiHelper.removeAllDeliveredNotifications()
+        NotificationService.shared.removeAllDeliveredNotifications()
     }
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        NotificationHelper.notiHelper.requestNotificationAuthorization()
-        CountdownTimer.timer.updateUI = updateLabels
+        NotificationService.shared.requestNotificationAuthorization()
+        CountdownTimer.shared.updateUI = updateLabels
         updateButtons()
-        if(CountdownTimer.timer.isFinished){
+        if(CountdownTimer.shared.isFinished){
             timePicker.isHidden = false
             remainingTimeView.isHidden = true
         }
@@ -76,38 +76,38 @@ class TimerPopUpViewController: UIViewController {
     
     //MARK: Timer functions
     func stop(){
-        CountdownTimer.timer.stop()
+        CountdownTimer.shared.stop()
         timePicker.isHidden = false
         remainingTimeView.isHidden = true
         updateButtons()
     }
     func pause(){
-        CountdownTimer.timer.pause()
+        CountdownTimer.shared.pause()
         updateButtons()
     }
     func start(){
         timePicker.isHidden = true
         remainingTimeView.isHidden = false
-        CountdownTimer.timer.start()
+        CountdownTimer.shared.start()
         updateButtons()
         updateLabels()
     }
     func updateButtons(){
-        if (!CountdownTimer.timer.isFinished) {
+        if (!CountdownTimer.shared.isFinished) {
             leftButton.setTitle("Restart", for: .normal)
             rightButton.setTitle("Start", for: .normal)
         }
-        if(CountdownTimer.timer.isFinished){
+        if(CountdownTimer.shared.isFinished){
             leftButton.setTitle("Close", for: .normal)
             rightButton.setTitle("Start", for: .normal)
         }
-        if(!CountdownTimer.timer.isFinished && !CountdownTimer.timer.isPaused){
+        if(!CountdownTimer.shared.isFinished && !CountdownTimer.shared.isPaused){
             leftButton.setTitle("Restart", for: .normal)
             rightButton.setTitle("Pause", for: .normal)
         }
     }
     func updateLabels() {
-        var remainingTime = CountdownTimer.timer.RemainingTime
+        var remainingTime = CountdownTimer.shared.RemainingTime
         if(remainingTime == 0){
             stop()
         }
@@ -132,7 +132,7 @@ class TimerPopUpViewController: UIViewController {
     }
 
     private func getExpDate()-> DateComponents {
-        let expDate = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970 + Double(CountdownTimer.timer.RemainingTime))
+        let expDate = Date.init(timeIntervalSince1970: Date().timeIntervalSince1970 + Double(CountdownTimer.shared.RemainingTime))
         return Calendar.current.dateComponents([.hour, .minute, .second] , from: expDate)
     }
    
@@ -141,10 +141,10 @@ class TimerPopUpViewController: UIViewController {
     @objc func pauseWhenBackground(noti: Notification) {
         let shared = UserDefaults.standard
         shared.set(Date(), forKey: "savedTime")
-        shared.set(CountdownTimer.timer.RemainingTime, forKey: "savedRemainigTime")
-        NotificationHelper.notiHelper.sendNotification(request: runningRequest())
-        NotificationHelper.notiHelper.sendNotification(request: expiredRequest())
-        CountdownTimer.timer.stop()
+        shared.set(CountdownTimer.shared.RemainingTime, forKey: "savedRemainigTime")
+        NotificationService.shared.sendNotification(request: runningRequest())
+        NotificationService.shared.sendNotification(request: expiredRequest())
+        CountdownTimer.shared.stop()
     }
     
     @objc func willEnterForeground(noti: Notification) {
@@ -154,12 +154,12 @@ class TimerPopUpViewController: UIViewController {
         
         if let savedDate = UserDefaults.standard.object(forKey: "savedTime") as? Date {
             if let savedTime = UserDefaults.standard.object(forKey: "savedRemainigTime") as? Int {
-                CountdownTimer.timer.RemainingTime = savedTime
+                CountdownTimer.shared.RemainingTime = savedTime
                 (diffHrs, diffMins, diffSecs) = TimerPopUpViewController.getTimeDifference(startDate: savedDate)
                 let timeinsec = diffHrs*3600+diffMins*60+diffSecs
-                CountdownTimer.timer.RemainingTime = CountdownTimer.timer.RemainingTime - timeinsec
-                CountdownTimer.timer.setTime(sec: CountdownTimer.timer.RemainingTime)
-                CountdownTimer.timer.start()
+                CountdownTimer.shared.RemainingTime = CountdownTimer.shared.RemainingTime - timeinsec
+                CountdownTimer.shared.setTime(sec: CountdownTimer.shared.RemainingTime)
+                CountdownTimer.shared.start()
             }
         }
     }
@@ -168,7 +168,8 @@ class TimerPopUpViewController: UIViewController {
         let components = getExpDate()
         let runningNotificationContent = UNMutableNotificationContent()
         runningNotificationContent.title = "Timer is running"
-        runningNotificationContent.body = "Timer will expire at \(components.hour ?? 0):\(components.minute ?? 0)"
+        let time = String(format: "%02d:%02d", arguments: [components.hour ?? 0, components.minute ?? 0])
+        runningNotificationContent.body = "Timer will expire at \(time)"
 //        runningNotificationContent.badge = NSNumber(value: 1)
         
         let runningTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
@@ -177,12 +178,8 @@ class TimerPopUpViewController: UIViewController {
     private func expiredRequest()-> UNNotificationRequest{
         let components = getExpDate()
         let expiredNotificationContent = UNMutableNotificationContent()
-        expiredNotificationContent.title = "Timer is running"
-        expiredNotificationContent.body = "Timer will expire at \(components.hour ?? 0):\(components.minute ?? 0)"
+        expiredNotificationContent.title = "Timer expired!"
         expiredNotificationContent.sound = UNNotificationSound.init(named:UNNotificationSoundName(rawValue: "alarm_clock.mp3"))
-//        expiredNotificationContent.
-//        expiredNotificationContent.badge = NSNumber(value: 1)
-        
         let expiredTrigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         return UNNotificationRequest(identifier: "timerExpired", content: expiredNotificationContent, trigger: expiredTrigger)
     }

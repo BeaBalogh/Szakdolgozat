@@ -12,6 +12,7 @@ import GoogleSignIn
 import SideMenuSwift
 
 class MenuViewController: UIViewController {
+    let userDefault = UserDefaults.standard
 
     @IBOutlet weak var pofileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -30,7 +31,7 @@ class MenuViewController: UIViewController {
             print("[Example] View Controller Cache Identifier: \(identifier)")
         }
     }
-    @IBAction func listTap(_ sender: Any) {
+    @IBAction func favTap(_ sender: UITapGestureRecognizer!) {
         
         sideMenuController?.setContentViewController(with: "1", animated: false)
         sideMenuController?.hideMenu()
@@ -39,13 +40,27 @@ class MenuViewController: UIViewController {
             print("[Example] View Controller Cache Identifier: \(identifier)")
         }
     }
-    @IBAction func newTap(_ sender: Any) {
-//        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyBoard.instantiateViewController(withIdentifier: "newRecipe")
-//        let nc = storyBoard.instantiateViewController(withIdentifier: "RecipesNav") as! UINavigationController
-//        nc.pushViewController(vc, animated: true)
-
+    @IBAction func cookedTap(_ sender: UITapGestureRecognizer!) {
+        
         sideMenuController?.setContentViewController(with: "2", animated: false)
+        sideMenuController?.hideMenu()
+        
+        if let identifier = sideMenuController?.currentCacheIdentifier() {
+            print("[Example] View Controller Cache Identifier: \(identifier)")
+        }
+    }
+    @IBAction func myRecipesTap(_ sender: UITapGestureRecognizer!) {
+        
+        sideMenuController?.setContentViewController(with: "3", animated: false)
+        sideMenuController?.hideMenu()
+        
+        if let identifier = sideMenuController?.currentCacheIdentifier() {
+            print("[Example] View Controller Cache Identifier: \(identifier)")
+        }
+    }
+    @IBAction func newTap(_ sender: Any) {
+
+        sideMenuController?.setContentViewController(with: "4", animated: false)
         sideMenuController?.hideMenu()
         
         if let identifier = sideMenuController?.currentCacheIdentifier() {
@@ -56,21 +71,39 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        FavTap.name = "Favorites"
+        CookedTap.name = "Cooked"
+        MyRecipesTap.name = "My Recipes"
         sideMenuController?.cache(viewControllerGenerator: {
-            self.storyboard?.instantiateViewController(withIdentifier: "ListNavController")
+            self.storyboard?.instantiateViewController(withIdentifier: "FavNavController")
         }, with: "1")
-        
+        sideMenuController?.cache(viewControllerGenerator: {
+            self.storyboard?.instantiateViewController(withIdentifier: "CookedNavController")
+        }, with: "2")
+        sideMenuController?.cache(viewControllerGenerator: {
+            self.storyboard?.instantiateViewController(withIdentifier: "MyRecipesNavController")
+        }, with: "3")
         sideMenuController?.cache(viewControllerGenerator: {
             self.storyboard?.instantiateViewController(withIdentifier: "NewNavController")
-        }, with: "2")
+        }, with: "4")
         
         sideMenuController?.delegate = self
         let currentuser = Auth.auth().currentUser
         usernameLabel.text = currentuser?.displayName
         emailLabel.text = currentuser?.email
-        let url = URL(string: "http://www.seedcoworking.com/wp-content/uploads/2018/06/placeholder.jpg")!
-        let data = try? Data(contentsOf: currentuser?.photoURL ?? url)
-        pofileImageView.image = UIImage(data: data!)
+        if let cachedImage = userDefault.value(forKey: "profilePhoto") as? Data{
+            pofileImageView.image = UIImage(data: cachedImage)
+        } else {
+            let url = URL(string: "http://www.seedcoworking.com/wp-content/uploads/2018/06/placeholder.jpg")!
+            let data = try? Data(contentsOf: currentuser?.photoURL ?? url)
+            if (data != nil) {
+                pofileImageView.image = UIImage(data: data!)
+//                imageCache.setObject(pofileImageView.image!, forKey: "profilePhoto")
+                userDefault.set(pofileImageView.image?.jpegData(compressionQuality: 1), forKey: "profilePhoto")
+            }else{
+                pofileImageView.image = #imageLiteral(resourceName: "placeholder")
+            }
+        }
     }
     private func configureView() {
         SideMenuController.preferences.basic.menuWidth = 240

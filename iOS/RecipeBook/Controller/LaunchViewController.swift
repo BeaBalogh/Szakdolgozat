@@ -19,15 +19,11 @@ class LaunchViewController: UIViewController {
 //        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         if Auth.auth().currentUser == nil {
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! MainLoginViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "loginNavController") as! UINavigationController
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = vc
         }
         else{
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "RecipesNav") as! UINavigationController
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = vc
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let contentViewController = storyboard.instantiateViewController(withIdentifier: "RecipesNav") as! UINavigationController
             let menuViewController = storyboard.instantiateViewController(withIdentifier: "Menu") 

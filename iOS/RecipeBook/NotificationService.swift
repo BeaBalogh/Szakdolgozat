@@ -10,9 +10,9 @@ import Foundation
 import UserNotifications
 
 
-class NotificationHelper{
-    
-    static var notiHelper = NotificationHelper()
+class NotificationService{
+    private init(){}
+    static let shared = NotificationService()
  
     let userNotificationCenter = UNUserNotificationCenter.current()
     

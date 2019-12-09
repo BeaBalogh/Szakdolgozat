@@ -10,14 +10,9 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 import SideMenuSwift
+import Reachability
 
 private let reuseIdentifier = "RecipeCell"
-let recipe = Recipe(id: "asd", name: "Palacsinta", imgURL: "String", ingredients: ["alma" : "3 db"], category: "Dessert", instruction: "Susd meg!", comments: [], image: "asd")
-let recipe2 = Recipe(id: "asd", name: "Sajt", imgURL: "String", ingredients: ["alma" : "3 db"], category: "Dessert", instruction: "Susd meg!", comments: [], image: "asd")
-let recipe3 = Recipe(id: "asd", name: "Tea", imgURL: "String", ingredients: ["alma" : "3 db","alma1" : "3 db","alma2" : "3 db"], category: "Dessert", instruction: "Susd meg!", comments: [], image: "asd")
-private var dataSource: [Recipe] = [recipe, recipe2, recipe2, recipe3, recipe,recipe, recipe2, recipe2, recipe3, recipe]
-
-
 
 class RecipesViewController: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate{
     
@@ -28,13 +23,23 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
     @IBAction func showMenu(_ sender: Any) {
             sideMenuController?.revealMenu()
     }
-    var dataSourceForSearchResult:[Recipe]?
+    
+    let model = RecipesModel.shared
+    var observers = [NSKeyValueObservation]()
+    
+    var dataSource: [Recipe] = []
+    var dataSourceForSearchResult:[Recipe] = []
     var searchBarActive:Bool = false
     var refreshControl:UIRefreshControl?
-    
+    let reachability = try! Reachability()
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: reachability)
+
+        observeModel()
+        model.getRandom()
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -42,6 +47,42 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
         collectionView.backgroundColor = UIColor.clear
         
     }
+    
+    func observeModel() {
+        self.observers = [
+            model.observe(\RecipesModel.randomRecipes, options: [.initial]) { (model, change) in
+                self.dataSource = model.randomRecipes
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            },
+            model.observe(\RecipesModel.searchRecipes, options: [.initial]) { (model, change) in
+                self.dataSourceForSearchResult = model.searchRecipes
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        ]
+    }
+    
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+            model.getRandom()
+        case .cellular:
+            print("Reachable via Cellular")
+            model.getRandom()
+        case .unavailable:
+            print("Network not reachable")
+        case .none:
+            print("Network not reachable")
+        }
+    }
+    
 //    deinit{
 //        self.removeObservers()
 //    }
@@ -94,7 +135,7 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
             if let paths = collectionView?.indexPathsForSelectedItems {
                 let row = paths[0].row
                 if (self.searchBar.text!.isEmpty == false) {
-                    vc.recipe = self.dataSourceForSearchResult![row];
+                    vc.recipe = self.dataSourceForSearchResult[row];
                 }
                 else{
                     vc.recipe = dataSource[row]
@@ -111,29 +152,41 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.searchBarActive {
-            return self.dataSourceForSearchResult!.count;
+            return self.dataSourceForSearchResult.count;
         }
         return dataSource.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! RecipeCollectionViewCell
-        
-        var recipe = dataSource[indexPath.row]
+        var recipe = Recipe("")
         if (self.searchBar.text!.isEmpty == false) {
-            recipe = self.dataSourceForSearchResult![indexPath.row];
+            if(indexPath.row < self.dataSourceForSearchResult.count){
+                recipe = self.dataSourceForSearchResult[indexPath.row];
+            }
+            else{ return cell }
+        }else{
+            recipe = dataSource[indexPath.row]
         }
         cell.nameLabel.text = recipe.name
         cell.categoryLabel.text = recipe.category
-    
+
+        
+        if let imageData = try? Data(contentsOf: URL(string: recipe.imgURL)!){
+            if let image = UIImage(data: imageData){
+                    cell.mealImage.image = image.resize(image: image, targetSize: CGRect(x: 0, y: 0, width: 180, height: 180).size)
+            }
+        }
+
         return cell
     }
 
     // MARK: Search
     func filterContentForSearchText(searchText:String){
-        self.dataSourceForSearchResult = dataSource.filter({ (recipe:Recipe) -> Bool in
-            return recipe.name.contains(searchText)
-        })
+//        self.dataSourceForSearchResult = dataSource.filter({ (recipe:Recipe) -> Bool in
+//            return recipe.name.contains(searchText)
+//        })
+        model.search(name: searchText)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -186,4 +239,3 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
         }
     }
 }
-

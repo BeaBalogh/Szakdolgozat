@@ -15,8 +15,9 @@ class NavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         actionButton.buttonColor = .init(red: 252/255, green: 212/255, blue: 72/255, alpha: 1)
-        
-        actionButton.addItem(title: "Timer", image: #imageLiteral(resourceName: "icons8-alarm-clock-50")) { item in
+        actionButton.buttonImageColor = UIColor.white
+        actionButton.tintColor = UIColor.white
+        actionButton.addItem(title: "Timer", image: #imageLiteral(resourceName: "index")) { item in
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let timerVC = storyboard.instantiateViewController(withIdentifier: "SetTimer") as! TimerPopUpViewController

@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 class CountdownTimer {
-    static var timer = CountdownTimer()
+    static let shared = CountdownTimer()
 
     private var remainingTime = 10
     private var audioPlayer = AVAudioPlayer()
@@ -30,10 +30,10 @@ class CountdownTimer {
     var updateUI : UpdateUI? = nil
     //MARK: Initialization
     
-    init() {
+    private init(){
         if remainingTime<=0{
             deinitTimer()
-            NotificationHelper.notiHelper.removeAllDeliveredNotifications()
+            NotificationService.shared.removeAllDeliveredNotifications()
         }
         do
         {
@@ -84,7 +84,7 @@ class CountdownTimer {
         if (remainingTime == 0)
         {
             stop()
-            Helper.showTimerAlert(title: "Timer expired!⏰", message: nil)
+            AlertHelper.showTimerAlert(title: "Timer expired!⏰", message: nil)
             audioPlayer.play()
         }
         if remainingTime<0{
