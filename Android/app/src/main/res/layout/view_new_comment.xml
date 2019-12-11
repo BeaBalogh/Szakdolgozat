@@ -63,7 +63,7 @@
         android:layout_marginStart="-16dp"
         android:layout_toEndOf="@+id/ivMealNewComment"
         android:background="@drawable/ic_cancel"
-        tools:visibility="invisible" />
+        tools:visibility="gone" />
 
     <RatingBar
         android:id="@+id/rbNewComment"

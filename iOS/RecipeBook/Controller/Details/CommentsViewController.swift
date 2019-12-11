@@ -9,6 +9,9 @@
 import UIKit
 import HCSStarRatingView
 import GrowingTextView
+import AVFoundation
+import Photos
+
 
 class CommentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
  
@@ -40,11 +43,53 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         view.endEditing(true)
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .authorized: // The user has previously granted access to the camera.
+                self.openCamera()
+                
+            case .notDetermined: // The user has not yet been asked for camera access.
+                AVCaptureDevice.requestAccess(for: .video) { granted in
+                    if granted {
+                        self.openCamera()
+                    }
+                }
+                
+            case .denied: // The user has previously denied access.
+                return
+                
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+            
+            default:
+                return
+            }
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallery()
+            switch PHPhotoLibrary.authorizationStatus(){
+            case .authorized: // The user has previously granted access to the camera.
+                self.openGallery()
+                
+            case .notDetermined: // The user has not yet been asked for camera access.
+                PHPhotoLibrary.requestAuthorization({ (status) in
+                    if status == PHAuthorizationStatus.authorized{
+                        self.openGallery()
+                    }
+                })
+                
+            case .denied: // The user has previously denied access.
+                let alert  = UIAlertController(title: "Warning", message: "You denied the permission to access gallery.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+                
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+                    
+            default:
+                return
+            }
         }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -127,10 +172,10 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: Image picker functions
     func openCamera(){
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.sourceType = .camera
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -142,11 +187,11 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     func openGallery(){
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+            imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
         else

@@ -15,6 +15,24 @@
         android:paddingTop="56dp"
         android:paddingRight="24dp">
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            app:srcCompat="@drawable/icon" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="TheMealDB RecipeBook"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

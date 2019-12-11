@@ -7,7 +7,7 @@ import hu.bme.aut.android.ui.activity.MainActivity
 class PrefUtil {
     companion object {
 
-        private const val TIMER_STATE_ID = "hu.bme.aut.android.timer.timer_state"
+        private const val TIMER_STATE_ID = "timer.timer_state"
 
         fun getTimerState(context: Context): MainActivity.TimerState{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -23,7 +23,7 @@ class PrefUtil {
         }
 
 
-        private const val SECONDS_REMAINING_ID = "hu.bme.aut.android.timer.seconds_remaining"
+        private const val SECONDS_REMAINING_ID = "timer.seconds_remaining"
 
         fun getSecondsRemaining(context: Context): Long{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -37,7 +37,7 @@ class PrefUtil {
         }
 
 
-        private const val ALARM_SET_TIME_ID = "hu.bme.aut.android.timer.backgrounded_time"
+        private const val ALARM_SET_TIME_ID = "timer.backgrounded_time"
 
         fun getAlarmSetTime(context: Context): Long{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		DD6B4D806C886D1C1A70BE7B /* Pods_RecipeBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7B1A2F04DE9CB3EA20A222 /* Pods_RecipeBook.framework */; };
+		EE5FDB5523A097BE00AF5C4D /* NewIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5FDB5423A097BE00AF5C4D /* NewIngredientTableViewCell.swift */; };
+		EE5FDB5723A0A9D600AF5C4D /* timer.png in Resources */ = {isa = PBXBuildFile; fileRef = EE5FDB5623A0A9D600AF5C4D /* timer.png */; };
 		EE80EF6B239356FD00BFC216 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF3D239356FD00BFC216 /* 1.mp3 */; };
 		EE80EF6D239356FD00BFC216 /* alarm_clock.caf in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF3F239356FD00BFC216 /* alarm_clock.caf */; };
 		EE80EF6E239356FD00BFC216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF40239356FD00BFC216 /* Assets.xcassets */; };
@@ -54,6 +56,8 @@
 		074FDCCBD177A725E8F37DD0 /* Pods-RecipeBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeBook.release.xcconfig"; path = "Target Support Files/Pods-RecipeBook/Pods-RecipeBook.release.xcconfig"; sourceTree = "<group>"; };
 		9F3DE273D6FC6F995875E290 /* Pods-RecipeBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeBook.debug.xcconfig"; path = "Target Support Files/Pods-RecipeBook/Pods-RecipeBook.debug.xcconfig"; sourceTree = "<group>"; };
 		EA7B1A2F04DE9CB3EA20A222 /* Pods_RecipeBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE5FDB5423A097BE00AF5C4D /* NewIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIngredientTableViewCell.swift; sourceTree = "<group>"; };
+		EE5FDB5623A0A9D600AF5C4D /* timer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer.png; sourceTree = "<group>"; };
 		EE80EF3D239356FD00BFC216 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		EE80EF3F239356FD00BFC216 /* alarm_clock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm_clock.caf; sourceTree = "<group>"; };
 		EE80EF40239356FD00BFC216 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				EE80EF44239356FD00BFC216 /* Controller */,
 				EE80EF60239356FD00BFC216 /* View */,
 				EE80EF40239356FD00BFC216 /* Assets.xcassets */,
+				EE5FDB5623A0A9D600AF5C4D /* timer.png */,
 				EE80EF3D239356FD00BFC216 /* 1.mp3 */,
 				EE80EF41239356FD00BFC216 /* GoogleService-Info.plist */,
 				EE80EF3F239356FD00BFC216 /* alarm_clock.caf */,
@@ -212,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				EE80EF61239356FD00BFC216 /* CommentTableViewCell.swift */,
+				EE5FDB5423A097BE00AF5C4D /* NewIngredientTableViewCell.swift */,
 				EE80EF62239356FD00BFC216 /* IngredientsTableViewCell.swift */,
 				EE80EF63239356FD00BFC216 /* RecipeCollectionViewCell.swift */,
 			);
@@ -340,6 +346,7 @@
 				EE80EF9523935A1D00BFC216 /* LaunchScreen.storyboard in Resources */,
 				EE80EF6E239356FD00BFC216 /* Assets.xcassets in Resources */,
 				EE80EF6F239356FD00BFC216 /* GoogleService-Info.plist in Resources */,
+				EE5FDB5723A0A9D600AF5C4D /* timer.png in Resources */,
 				EE80EF8C239356FD00BFC216 /* alarm_clock.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +433,7 @@
 				EEE644F42394870100F5D575 /* TheMealDB.swift in Sources */,
 				EEC1F5EC239AAD9B0012647E /* ListsViewController.swift in Sources */,
 				EE80EF88239356FD00BFC216 /* IngredientsTableViewCell.swift in Sources */,
+				EE5FDB5523A097BE00AF5C4D /* NewIngredientTableViewCell.swift in Sources */,
 				EE80EF77239356FD00BFC216 /* CommentsViewController.swift in Sources */,
 				EEE644E92394752600F5D575 /* PersistentService.swift in Sources */,
 				EE80EF8A239356FD00BFC216 /* AppDelegate.swift in Sources */,

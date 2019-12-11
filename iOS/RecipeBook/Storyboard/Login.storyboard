@@ -97,16 +97,33 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="0XH-vP-mCM" firstAttribute="centerX" secondItem="yZQ-TL-uRK" secondAttribute="centerX" id="F8l-X0-rsE"/>
-                            <constraint firstItem="z4n-73-pld" firstAttribute="top" secondItem="yZQ-TL-uRK" secondAttribute="topMargin" constant="50" id="PYa-n2-84q"/>
+                            <constraint firstItem="z4n-73-pld" firstAttribute="top" secondItem="yZQ-TL-uRK" secondAttribute="topMargin" constant="50" id="PYa-n2-84q">
+                                <variation key="heightClass=compact" constant="7"/>
+                            </constraint>
                             <constraint firstAttribute="bottomMargin" secondItem="0XH-vP-mCM" secondAttribute="bottom" constant="250" id="UWp-m5-XmV"/>
                             <constraint firstItem="0XH-vP-mCM" firstAttribute="leading" secondItem="yZQ-TL-uRK" secondAttribute="leadingMargin" id="Vdp-lh-cPX"/>
                             <constraint firstItem="z4n-73-pld" firstAttribute="centerX" secondItem="yZQ-TL-uRK" secondAttribute="centerX" id="d0q-1Q-Xf3"/>
                             <constraint firstItem="wch-FL-eqC" firstAttribute="centerX" secondItem="yZQ-TL-uRK" secondAttribute="centerX" id="gYX-t0-Wng"/>
+                            <constraint firstItem="0XH-vP-mCM" firstAttribute="top" secondItem="wch-FL-eqC" secondAttribute="bottom" constant="8" symbolic="YES" id="hrB-ZX-YKp"/>
+                            <constraint firstItem="wch-FL-eqC" firstAttribute="top" secondItem="0XH-vP-mCM" secondAttribute="bottom" constant="8" symbolic="YES" id="iOW-Cg-g57"/>
                             <constraint firstItem="0XH-vP-mCM" firstAttribute="centerX" secondItem="yZQ-TL-uRK" secondAttribute="centerX" id="jxr-S5-4yv"/>
                             <constraint firstItem="wch-FL-eqC" firstAttribute="top" secondItem="z4n-73-pld" secondAttribute="bottom" constant="8" symbolic="YES" id="rS0-gE-Dv5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0XH-vP-mCM" secondAttribute="trailing" id="x9J-r7-j53"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YVi-uE-fxS"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hrB-ZX-YKp"/>
+                                <exclude reference="iOW-Cg-g57"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="UWp-m5-XmV"/>
+                                <include reference="hrB-ZX-YKp"/>
+                                <exclude reference="iOW-Cg-g57"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="BDB-3B-pFB"/>
                     <connections>
@@ -294,7 +311,6 @@
         <!--Navigation Controller-->
         <scene sceneID="oXy-Dd-Xlt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hCZ-FL-4dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="loginNavController" automaticallyAdjustsScrollViewInsets="NO" id="AIj-TG-a8E" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yQg-jl-9qv">
@@ -306,6 +322,7 @@
                         <segue destination="ION-UI-Pbr" kind="relationship" relationship="rootViewController" id="VK6-L6-ddX"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hCZ-FL-4dw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1354.4000000000001" y="79.802955665024641"/>
         </scene>

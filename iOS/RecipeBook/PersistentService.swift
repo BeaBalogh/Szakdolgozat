@@ -17,8 +17,12 @@ class PersistentService{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
         let documentsDirectory = paths.object(at: 0) as! NSString
         let path = documentsDirectory.appendingPathComponent(namePlist+".plist")
-        let dict = NSMutableDictionary(contentsOfFile: path)!
-        return dict as AnyObject
+        if let dict = NSMutableDictionary(contentsOfFile: path){
+            return dict as AnyObject
+        }
+        else{
+            return [:] as AnyObject
+        }
     }
     func readPlist(namePlist: String, key: String) -> AnyObject{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray

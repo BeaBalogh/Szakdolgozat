@@ -7,12 +7,6 @@
 //
 
 import Foundation
-//enum  Categories {
-//    Beef, Breakfast, Chicken, Dessert, Goat, Lamb, Miscellaneous, Pasta, Pork, Seafood, Side,
-//    Starter, Vegan, Vegetarian
-//}
-//
-
 
 class Recipe: NSObject, Codable{
     var id: String = ""

@@ -18,6 +18,7 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
@@ -54,8 +55,6 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
     private var fileUri: Uri? = null
     private var withImage = false
     private var connReciver = ConnectivityReceiver()
-
-    private val PICK_FROM_GALLERY = 1
 
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
@@ -122,7 +121,7 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
         loadComments()
         commentsAdapter.itemClickListener = this
         recyclerView.adapter = commentsAdapter
-
+        btnCancel.isVisible = false
         imageView.setOnClickListener {
             imagePicker()
         }
@@ -170,6 +169,7 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
         fileUri = null
         etTextNewComment.text = null
         btnSend.isEnabled = true
+        btnCancel.isVisible = false
     }
 
     private fun loadComment(commentID: String) {
@@ -194,44 +194,14 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
 
 
     private fun imagePicker() {
-        if (ActivityCompat.checkSelfPermission(
-                context!!,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                activity!!,
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                PICK_FROM_GALLERY
-            )
+        //system OS is < Marshmallow
+        ImagePicker.with(this)
+            .crop(1f, 1f)                //Crop Square image(Optional)
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .start()
+        withImage = true
+        btnSend.isEnabled = false
 
-        }
-        if (ActivityCompat.checkSelfPermission(
-                context!!,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                activity!!,
-                arrayOf(
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                PICK_FROM_GALLERY
-            )
-
-        } else {
-            //system OS is < Marshmallow
-            ImagePicker.with(this)
-                .crop(1f, 1f)                //Crop Square image(Optional)
-                .compress(1024)            //Final image size will be less than 1 MB(Optional)
-                .start()
-            withImage = true
-            btnSend.isEnabled = false
-        }
     }
 
     override fun onImageClick(bmp: Bitmap) {
@@ -250,7 +220,7 @@ class CommentsFragment : Fragment(), CommentsAdapter.CommentItemClickListener,
 
             //You can also get File Path from intent
 //            val filePath = ImagePicker.getFilePath(data)
-
+            btnCancel.isVisible = true
             imageName = System.currentTimeMillis().toString()
             btnSend.isEnabled = true
 

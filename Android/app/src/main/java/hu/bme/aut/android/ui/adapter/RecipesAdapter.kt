@@ -64,6 +64,11 @@ class RecipesAdapter(private val context: Context) :
         notifyDataSetChanged()
     }
 
+    fun deleteRow(position: Int) {
+        recipes.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
     override fun getItemCount() = recipes.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -77,11 +82,17 @@ class RecipesAdapter(private val context: Context) :
             view.setOnClickListener {
                 recipe?.let { recipe -> itemClickListener?.onItemClick(recipe) }
             }
+            view.setOnLongClickListener {view ->
+                itemClickListener?.onItemLongClick(adapterPosition, view)
+                true
+            }
+
         }
     }
 
     interface RecipeItemClickListener {
         fun onItemClick(recipe: Recipe)
+        fun onItemLongClick(position: Int, view: View): Boolean
     }
 
 }

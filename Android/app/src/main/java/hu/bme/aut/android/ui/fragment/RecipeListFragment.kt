@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -116,6 +117,19 @@ class RecipeListFragment : Fragment(), RecipesAdapter.RecipeItemClickListener,
         hasInternet.isRefreshing = false
         noInternet.isRefreshing = false
 
+    }
+
+    override fun onItemLongClick(position: Int, view: View): Boolean {
+            val popup = PopupMenu(this.context, view)
+            popup.inflate(R.menu.menu_recipe)
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.delete -> adapter.deleteRow(position)
+                }
+                false
+            }
+            popup.show()
+            return false
     }
 
     override fun onItemClick(recipe: Recipe) {
