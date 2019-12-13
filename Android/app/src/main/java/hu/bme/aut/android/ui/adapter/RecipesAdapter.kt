@@ -63,7 +63,9 @@ class RecipesAdapter(private val context: Context) :
         recipes.addAll(recipe)
         notifyDataSetChanged()
     }
-
+    fun getRow(position: Int): Recipe{
+        return  recipes[position]
+    }
     fun deleteRow(position: Int) {
         recipes.removeAt(position)
         notifyItemRemoved(position)

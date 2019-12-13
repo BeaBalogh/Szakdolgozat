@@ -60,7 +60,10 @@ class RecipeService {
                 Log.d("user", "get failed with ", exception)
             }
     }
-
+    fun deleteRecipe(id: String){
+        val ref = db.collection("recipes").document(id)
+        ref.delete()
+    }
     fun uploadRecipe(recipe: Recipe, fileUri: Uri): Task<Void> {
         val ref = db.collection("recipes").document()
         val upload = uploadImage(fileUri, recipe.imgURL)

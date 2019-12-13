@@ -30,6 +30,10 @@ object DataManager {
         recipeService.saveRecipe(recipe)
     }
 
+    fun deleteRecipe(recipe:Recipe){
+        saved.remove(recipe)
+        recipeService.deleteRecipe(recipe.id)
+    }
     fun addRecipe(r: Recipe) {
         val recipe = Recipe(
             r.id,

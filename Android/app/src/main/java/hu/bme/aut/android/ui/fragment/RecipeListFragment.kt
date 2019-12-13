@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import hu.bme.aut.android.R
 import hu.bme.aut.android.dataManager.DataManager
+import hu.bme.aut.android.dataManager.network.RecipeService
 import hu.bme.aut.android.model.Categories
 import hu.bme.aut.android.model.Recipe
 import hu.bme.aut.android.ui.activity.MainActivity
@@ -125,7 +126,10 @@ class RecipeListFragment : Fragment(), RecipesAdapter.RecipeItemClickListener,
             popup.inflate(R.menu.menu_recipe)
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.delete -> adapter.deleteRow(position)
+                    R.id.delete ->
+                    {
+                        DataManager.deleteRecipe(adapter.getRow(position))
+                        adapter.deleteRow(position)}
                 }
                 false
             }
