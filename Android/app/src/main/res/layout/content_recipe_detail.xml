@@ -47,22 +47,39 @@
             android:layout_below="@id/directions"
             android:text="ASDFASDFSDFASDF..." />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivMealDetails"-->
-<!--            android:layout_width="150dp"-->
-<!--            android:layout_height="150dp"-->
-<!--            android:layout_below="@+id/tvTextComment"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:visibility="invisible" />-->
-
-        <Button
-            android:id="@+id/btnCooked"
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivMealDetails"-->
+        <!--            android:layout_width="150dp"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_below="@+id/tvTextComment"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:visibility="invisible" />-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="2"
             android:layout_below="@id/description"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="100dp"
-            android:text="@string/cooked" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCooked"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="100dp"
+                android:text="@string/cooked" />
+
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="100dp"
+                android:text="@string/share" />
+        </LinearLayout>
+
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
 

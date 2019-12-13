@@ -9,9 +9,21 @@
 import UIKit
 
 class DetailsTabViewController: UITabBarController {
-    let model = RecipesModel.shared
+    let model = RecipesViewModel.shared
     var recipe:Recipe = Recipe("")
     @IBOutlet weak var favButton: UIBarButtonItem!
+    @IBAction func shareRecipe(_ sender: UIBarButtonItem) {
+        var ingredients = ""
+        for item in recipe.ingredients.keys {
+            ingredients += item + "\t" + recipe.ingredients[item]! + "\n"
+        }
+        let text = recipe.name + "\n\n" + ingredients + "\n" + recipe.instruction
+        let textShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textShare , applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+
     @IBAction func addFavs(_ sender: Any) {
         model.addOrRemoveFavorite(id: recipe.id)
         if( model.isFavorite(id: recipe.id)){
@@ -30,7 +42,7 @@ class DetailsTabViewController: UITabBarController {
             }
         }
         if( model.isFavorite(id: recipe.id)){
-            favButton.image = #imageLiteral(resourceName: "icons8-heart-90")
+            favButton.image = #imageLiteral(resourceName: "icons8-heart-30")
         } else {
             favButton.image = #imageLiteral(resourceName: "icons8-heart-outline-30")
         }    }

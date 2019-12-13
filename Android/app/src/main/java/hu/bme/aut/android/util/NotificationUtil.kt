@@ -8,9 +8,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.media.AudioAttributes
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import hu.bme.aut.android.AppConstants
@@ -19,6 +16,9 @@ import hu.bme.aut.android.ui.activity.MainActivity
 import hu.bme.aut.android.reciver.TimerNotificationActionReceiver
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+
 
 class NotificationUtil {
     companion object {
@@ -35,17 +35,15 @@ class NotificationUtil {
                 0, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, true)
+            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER)
             nBuilder.setContentTitle("Timer Expired!")
                 .setContentText("Dismiss")
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity::class.java))
                 .addAction(R.drawable.ic_stop, "Dismiss", stopPendingIntent)
-                .setCategory(NotificationCompat.CATEGORY_ALARM)
-                .priority = NotificationCompat.PRIORITY_HIGH
 
             val nManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER, true)
+            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER)
 
             nManager.notify(TIMER_ID, nBuilder.build())
 
@@ -68,7 +66,7 @@ class NotificationUtil {
 
             val df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT)
 
-            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, false)
+            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER)
             nBuilder.setContentTitle("Timer is Running.")
                 .setContentText("End: ${df.format(Date(wakeUpTime))}")
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity::class.java))
@@ -78,7 +76,7 @@ class NotificationUtil {
 
             val nManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER, false)
+            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER)
 
             nManager.notify(TIMER_ID, nBuilder.build())
         }
@@ -91,7 +89,7 @@ class NotificationUtil {
                 0, resumeIntent, PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, false)
+            val nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER)
             nBuilder.setContentTitle("Timer is paused.")
                 .setContentText("Resume?")
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity::class.java))
@@ -100,7 +98,7 @@ class NotificationUtil {
 
             val nManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER, false)
+            nManager.createNotificationChannel(CHANNEL_ID_TIMER, CHANNEL_NAME_TIMER)
 
             nManager.notify(TIMER_ID, nBuilder.build())
         }
@@ -113,21 +111,15 @@ class NotificationUtil {
 
         private fun getBasicNotificationBuilder(
             context: Context,
-            channelId: String,
-            playSound: Boolean
+            channelId: String
         )
                 : NotificationCompat.Builder {
 
-            val notificationSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
 
-            val nBuilder = NotificationCompat.Builder(context, channelId)
+            return NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_timer_black)
                 .setAutoCancel(true)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-            if (playSound) nBuilder.setSound(notificationSound)
-            if (playSound) nBuilder.setVibrate(longArrayOf(0, 500, 0, 500, 0, 500))
-
-            return nBuilder
         }
 
         private fun <T> getPendingIntentWithStack(
@@ -147,28 +139,17 @@ class NotificationUtil {
         @TargetApi(26)
         private fun NotificationManager.createNotificationChannel(
             channelID: String,
-            channelName: String,
-            playSound: Boolean
+            channelName: String
         ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val notificationSound: Uri =
-                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-                val vibrating = longArrayOf(0, 400, 800, 600, 800, 800, 800, 1000)
-                val audioAttributes = AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
-                    .build()
-                val channelImportance = if (playSound) NotificationManager.IMPORTANCE_HIGH
-                else NotificationManager.IMPORTANCE_LOW
 
+
+                val channelImportance = NotificationManager.IMPORTANCE_HIGH
 
                 val nChannel = NotificationChannel(channelID, channelName, channelImportance)
                 nChannel.enableLights(true)
                 nChannel.lightColor = Color.BLUE
-                nChannel.shouldVibrate()
-                if (playSound) nChannel.setSound(notificationSound, audioAttributes)
-                if (playSound) nChannel.vibrationPattern = vibrating
-                if (playSound) nChannel.enableVibration(true)
+                nChannel.enableVibration(false)
                 this.createNotificationChannel(nChannel)
             }
         }

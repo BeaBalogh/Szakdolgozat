@@ -84,7 +84,7 @@ class CountdownTimer {
         if (remainingTime == 0)
         {
             stop()
-            AlertHelper.showTimerAlert(title: "Timer expired!⏰", message: nil)
+            AlertService.showTimerAlert(title: "Timer expired!⏰", message: nil)
             audioPlayer.play()
         }
         if remainingTime<0{

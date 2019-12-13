@@ -120,6 +120,7 @@ class RecipeListFragment : Fragment(), RecipesAdapter.RecipeItemClickListener,
     }
 
     override fun onItemLongClick(position: Int, view: View): Boolean {
+        if(title != "Recipes") {
             val popup = PopupMenu(this.context, view)
             popup.inflate(R.menu.menu_recipe)
             popup.setOnMenuItemClickListener { item ->
@@ -129,7 +130,8 @@ class RecipeListFragment : Fragment(), RecipesAdapter.RecipeItemClickListener,
                 false
             }
             popup.show()
-            return false
+        }
+        return false
     }
 
     override fun onItemClick(recipe: Recipe) {

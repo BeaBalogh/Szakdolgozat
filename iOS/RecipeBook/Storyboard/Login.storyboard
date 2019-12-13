@@ -113,15 +113,15 @@
                         <viewLayoutGuide key="safeArea" id="YVi-uE-fxS"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="hrB-ZX-YKp"/>
                                 <exclude reference="iOW-Cg-g57"/>
+                                <exclude reference="hrB-ZX-YKp"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <exclude reference="iOW-Cg-g57"/>
                                 <exclude reference="UWp-m5-XmV"/>
                                 <include reference="hrB-ZX-YKp"/>
-                                <exclude reference="iOW-Cg-g57"/>
                             </mask>
                         </variation>
                     </view>
@@ -188,11 +188,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="CRn-HU-kUS" secondAttribute="trailing" constant="30" id="3um-Em-c7w"/>
+                            <constraint firstItem="SeO-x2-32R" firstAttribute="top" secondItem="KgT-nb-fqC" secondAttribute="top" constant="8" id="4I6-nI-cej"/>
                             <constraint firstItem="CRn-HU-kUS" firstAttribute="leading" secondItem="nyP-xb-Ego" secondAttribute="leadingMargin" constant="30" id="EsS-BK-pqx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vdk-6T-HsV" secondAttribute="trailing" constant="30" id="FAq-v4-w4l"/>
                             <constraint firstItem="SeO-x2-32R" firstAttribute="centerX" secondItem="nyP-xb-Ego" secondAttribute="centerX" id="MIJ-SW-nQ8"/>
                             <constraint firstItem="E1l-4j-Rj6" firstAttribute="leading" secondItem="nyP-xb-Ego" secondAttribute="leadingMargin" constant="30" id="OdN-Wb-QUX"/>
-                            <constraint firstItem="vdk-6T-HsV" firstAttribute="top" secondItem="sKP-M9-f0W" secondAttribute="bottom" constant="80" id="Ofl-5b-0gx"/>
+                            <constraint firstItem="vdk-6T-HsV" firstAttribute="top" secondItem="sKP-M9-f0W" secondAttribute="bottom" constant="80" id="Ofl-5b-0gx">
+                                <variation key="widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="E1l-4j-Rj6" secondAttribute="trailing" constant="30" id="RRo-Le-xGj"/>
                             <constraint firstItem="sKP-M9-f0W" firstAttribute="centerX" secondItem="nyP-xb-Ego" secondAttribute="centerX" id="SJo-0I-T4j"/>
                             <constraint firstItem="sKP-M9-f0W" firstAttribute="top" secondItem="SeO-x2-32R" secondAttribute="bottom" constant="8" symbolic="YES" id="UM9-c0-zS2"/>
@@ -203,6 +206,17 @@
                             <constraint firstItem="CRn-HU-kUS" firstAttribute="centerX" secondItem="nyP-xb-Ego" secondAttribute="centerX" id="vI2-QJ-PMJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KgT-nb-fqC"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4I6-nI-cej"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="4I6-nI-cej"/>
+                                <exclude reference="nAU-V1-EyW"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics"/>
                 </viewController>
@@ -288,9 +302,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="szS-jk-IKE" secondAttribute="trailing" constant="30" id="eq8-s1-WYb"/>
                             <constraint firstItem="5oW-4r-jF2" firstAttribute="leading" secondItem="p1G-bd-eyx" secondAttribute="leadingMargin" constant="30" id="g3O-Vj-CxN"/>
                             <constraint firstItem="976-2d-LyR" firstAttribute="leading" secondItem="p1G-bd-eyx" secondAttribute="leadingMargin" constant="30" id="gO4-pO-dtV"/>
-                            <constraint firstItem="rLl-lS-quY" firstAttribute="top" secondItem="p1G-bd-eyx" secondAttribute="topMargin" constant="50" id="hM6-ST-KLn"/>
+                            <constraint firstItem="rLl-lS-quY" firstAttribute="top" secondItem="p1G-bd-eyx" secondAttribute="topMargin" constant="50" id="hM6-ST-KLn">
+                                <variation key="widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstItem="rLl-lS-quY" firstAttribute="centerX" secondItem="5oW-4r-jF2" secondAttribute="centerX" id="i17-uJ-ITa"/>
-                            <constraint firstItem="5oW-4r-jF2" firstAttribute="top" secondItem="397-SY-QJe" secondAttribute="bottom" constant="80" id="ouO-Rw-GFc"/>
+                            <constraint firstItem="5oW-4r-jF2" firstAttribute="top" secondItem="397-SY-QJe" secondAttribute="bottom" constant="80" id="ouO-Rw-GFc">
+                                <variation key="widthClass=regular" constant="8"/>
+                            </constraint>
                             <constraint firstItem="szS-jk-IKE" firstAttribute="leading" secondItem="p1G-bd-eyx" secondAttribute="leadingMargin" constant="30" id="zDq-Uw-9Q9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oXW-cY-XV8"/>
@@ -331,6 +349,6 @@
         <image name="icon" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8W3-Tr-9Iu"/>
+        <segue reference="wSR-gV-lej"/>
     </inferredMetricsTieBreakers>
 </document>

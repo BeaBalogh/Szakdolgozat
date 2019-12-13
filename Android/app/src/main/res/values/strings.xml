@@ -33,7 +33,7 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="action_log_out">Log out</string>
-    <string name="cooked">Cooked</string>
+    <string name="cooked">Add to Cooked</string>
     <string name="comments">Comments</string>
     <string name="write_down_your_experiences">Write down your experiences</string>
     <string name="new_comment">New comment</string>
@@ -45,4 +45,5 @@
     <string name="add_new_recipe">Add new recipe</string>
     <string name="log_out_warning">Are you sure you want to log out?</string>
     <string name="log_out">Log out</string>
+    <string name="share">Share</string>
 </resources>

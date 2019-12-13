@@ -1,5 +1,6 @@
 package hu.bme.aut.android.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class DirectionsFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.content_recipe_detail, container, false)
         val recyclerView = rootView.findViewById(R.id.ingredients_list) as RecyclerView
         val btnCooked: Button = rootView.findViewById(R.id.btnCooked)
+        val btnShare: Button = rootView.findViewById(R.id.btnShare)
 //        imageView = rootView.findViewById(R.id.ivMealDetails)
         recipeService = RecipeService()
         ingredientsAdapter = IngredientsAdapter(context!!)
@@ -41,25 +43,26 @@ class DirectionsFragment : Fragment() {
             btnCooked.isEnabled = false
 
         }
+        btnShare.setOnClickListener {
+            val recipe = viewModelShared.selectedRecipe
+            var ingredients = ""
+            for (item in recipe.ingredients.keys){
+                ingredients += item + "\t" + recipe.ingredients[item] + "\n"
+            }
+
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, recipe.name + "\n\n" + ingredients + "\n" + recipe.instruction)
+                type = "text/plain"
+            }
+            startActivity(sendIntent)
+        }
         if (viewModelShared.isCooked()) {
             btnCooked.text = "already Cooked"
             btnCooked.isEnabled = false
         }
 
         ingredientsAdapter.addAllIngredient(viewModelShared.selectedRecipe.ingredients.toList())
-
-//        val imgURL = viewModelShared.selectedRecipe.imgURL
-//        Log.d("URL", imgURL)
-////        if (imgURL.contains("http")) {
-//            Glide.with(this.context!!)
-//                .load(imgURL)
-//                .into(this.imageView)
-////        } else {
-////            val array = Base64.decode(viewModelShared.selectedRecipe.image, Base64.DEFAULT)
-////            Glide.with(this)
-////                .load(array)
-////                .into(this.imageView)
-////        }
 
         recyclerView.adapter = ingredientsAdapter
         rootView.description.text = viewModelShared.selectedRecipe.instruction

@@ -13,7 +13,7 @@ import Photos
 class NewRecipeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
   
-
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIImageView!
     @IBOutlet weak var ingredientsTable: UITableView!
     @IBOutlet weak var categoryPicker: UIPickerView!
@@ -21,64 +21,7 @@ class NewRecipeViewController: UIViewController,UITableViewDelegate, UITableView
     @IBAction func showMenu(_ sender: Any) {
         sideMenuController?.revealMenu()
     }
-    @IBAction func imageviewTapped(_ sender: Any) {
-        view.endEditing(true)
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            switch AVCaptureDevice.authorizationStatus(for: .video) {
-            case .authorized: // The user has previously granted access to the camera.
-                self.openCamera()
-                
-            case .notDetermined: // The user has not yet been asked for camera access.
-                AVCaptureDevice.requestAccess(for: .video) { granted in
-                    if granted {
-                        self.openCamera()
-                    }
-                }
-                
-            case .denied: // The user has previously denied access.
-                return
-                
-            case .restricted: // The user can't grant access due to restrictions.
-                return
-                
-            default:
-                return
-            }
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            switch PHPhotoLibrary.authorizationStatus(){
-            case .authorized: // The user has previously granted access to the camera.
-                self.openGallery()
-                
-            case .notDetermined: // The user has not yet been asked for camera access.
-                PHPhotoLibrary.requestAuthorization({ (status) in
-                    if status == PHAuthorizationStatus.authorized{
-                        self.openGallery()
-                    }
-                })
-                
-            case .denied: // The user has previously denied access.
-                let alert  = UIAlertController(title: "Warning", message: "You denied the permission to access gallery.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
-                
-            case .restricted: // The user can't grant access due to restrictions.
-                return
-                
-            default:
-                return
-            }
-        }))
-        
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-        
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +30,7 @@ class NewRecipeViewController: UIViewController,UITableViewDelegate, UITableView
         ingredientsTable.delegate = self
         ingredientsTable.dataSource = self
         cancelButton.isHidden = true
+        saveButton.layer.cornerRadius = 8
         mealImageView.layer.cornerRadius = 4
         mealImageView.layer.borderWidth = 1
         mealImageView.layer.borderColor =  UIColor.lightGray.cgColor
@@ -148,5 +92,63 @@ class NewRecipeViewController: UIViewController,UITableViewDelegate, UITableView
         return categories.count
     }
     
+    @IBAction func imageviewTapped(_ sender: Any) {
+        view.endEditing(true)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .authorized: // The user has previously granted access to the camera.
+                self.openCamera()
+                
+            case .notDetermined: // The user has not yet been asked for camera access.
+                AVCaptureDevice.requestAccess(for: .video) { granted in
+                    if granted {
+                        self.openCamera()
+                    }
+                }
+                
+            case .denied: // The user has previously denied access.
+                return
+                
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+                
+            default:
+                return
+            }
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            switch PHPhotoLibrary.authorizationStatus(){
+            case .authorized: // The user has previously granted access to the camera.
+                self.openGallery()
+                
+            case .notDetermined: // The user has not yet been asked for camera access.
+                PHPhotoLibrary.requestAuthorization({ (status) in
+                    if status == PHAuthorizationStatus.authorized{
+                        self.openGallery()
+                    }
+                })
+                
+            case .denied: // The user has previously denied access.
+                let alert  = UIAlertController(title: "Warning", message: "You denied the permission to access gallery.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+                
+            case .restricted: // The user can't grant access due to restrictions.
+                return
+                
+            default:
+                return
+            }
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 
 }

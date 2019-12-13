@@ -3,6 +3,7 @@ package hu.bme.aut.android.util
 import android.content.Context
 import android.preference.PreferenceManager
 import hu.bme.aut.android.ui.activity.MainActivity
+import java.util.*
 
 class PrefUtil {
     companion object {
@@ -47,6 +48,19 @@ class PrefUtil {
         fun setAlarmSetTime(time: Long, context: Context){
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
             editor.putLong(ALARM_SET_TIME_ID, time)
+            editor.apply()
+        }
+
+        private const val REQUEST_ID = "worker.id"
+
+        fun getRequestID(context: Context): String? {
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            return preferences.getString(REQUEST_ID, "")
+        }
+
+        fun setRequestID(id: String, context: Context){
+            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            editor.putString(REQUEST_ID, id)
             editor.apply()
         }
     }

@@ -14,7 +14,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var ingredientsKeys: [String] = []
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
     let actionButton = JJFloatingActionButton()
-    let model = RecipesModel.shared
+    let model = RecipesViewModel.shared
     
     @IBOutlet weak var directionsTextView: ContentSizedTextView!
     @IBOutlet weak var ingredientsTable: ContentSizedTableView!
@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func cookedAction(_ sender: Any) {
         model.addOrRemoveCooked(id: recipe.id)
         cookedButton.isEnabled = false
-        AlertHelper.showToast("Added to Cooked list!")
+        AlertService.showToast("Added to Cooked list!")
     }
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
         directionsTextView.text = recipe.instruction
         if(model.isCooked(id: recipe.id)){
             cookedButton.isEnabled = false
-            cookedButton.titleLabel?.text = "Already cooked!👨‍🍳"
+            cookedButton.titleLabel?.text = "Already added to Cooked!👨‍🍳"
         }
     }
     //MARK: TableView

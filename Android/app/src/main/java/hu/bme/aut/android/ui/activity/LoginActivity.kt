@@ -25,10 +25,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-
     companion object {
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
+        private var current = "main"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +47,22 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(i)
         } else {
-            setContentView(R.layout.activity_login)
+            if (savedInstanceState != null) {
+                when (savedInstanceState.getString("view")){
+                    "main" -> setContentView(R.layout.activity_login)
+                    "login" -> setContentView(R.layout.screen_login)
+                    "regist" -> setContentView(R.layout.screen_register)
+                }
+            } else setContentView(R.layout.activity_login)
         }
 
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("view", current)
 
+    }
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -165,9 +175,18 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btnGoogleLogin -> signIn()
-            R.id.btnToLogin -> setContentView(R.layout.screen_login)
-            R.id.btnToRegister -> setContentView(R.layout.screen_register)
-            R.id.btnBack -> setContentView(R.layout.activity_login)
+            R.id.btnToLogin -> {
+                setContentView(R.layout.screen_login)
+                current = "login"
+            }
+            R.id.btnToRegister -> {
+                setContentView(R.layout.screen_register)
+                current = "regist"
+            }
+            R.id.btnBack -> {
+                setContentView(R.layout.activity_login)
+                current = "main"
+            }
             R.id.btnLogin -> loginClick()
             R.id.btnRegister -> registerClick()
 

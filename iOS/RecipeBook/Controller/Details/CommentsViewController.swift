@@ -101,7 +101,7 @@ class CommentsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func sendComment(_ sender: Any) {
         view.endEditing(true)
         if(self.commentTextView.text! == "" || self.mealImageView.image == nil){
-            AlertHelper.showToast("Error: Empty comment!")
+            AlertService.showToast("Error: Empty comment!")
             return
         }
         self.sendButton.isEnabled = false

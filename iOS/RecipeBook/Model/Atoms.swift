@@ -51,7 +51,7 @@ class Recipe: NSObject, Codable{
         self.instruction = dictionary["instruction"] as! String
         let commentsArray = dictionary["comments"] as! [Any]
         for comment in commentsArray {
-            let comm = Comment(dictionary: comment as! [String: Any])
+            let comm = Comment(dictionary: comment as? [String: Any] ?? [:])
             self.comments.append(comm)
         }
         

@@ -24,7 +24,7 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
             sideMenuController?.revealMenu()
     }
     
-    let model = RecipesModel.shared
+    let model = RecipesViewModel.shared
     var observers = [NSKeyValueObservation]()
     
     var dataSource: [Recipe] = []
@@ -40,29 +40,35 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
 
         observeModel()
         model.getRandom()
-        
+        prepareUI()
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
         collectionView.backgroundColor = UIColor.clear
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = CGSize(width: view.bounds.width/2 - 20,height: view.bounds.width/2 - 20)
+        }
         
     }
     
     func observeModel() {
         self.observers = [
-            model.observe(\RecipesModel.randomRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipesViewModel.randomRecipes, options: [.initial]) { (model, change) in
                 self.dataSource = model.randomRecipes
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             },
-            model.observe(\RecipesModel.searchRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipesViewModel.searchRecipes, options: [.initial]) { (model, change) in
                 self.dataSourceForSearchResult = model.searchRecipes
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             }
         ]
+    }
+    @IBAction func hideKeyboard(_ sender: Any) {
+        view.endEditing(true)
     }
     
     @objc func reachabilityChanged(note: Notification) {
@@ -87,9 +93,10 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
 //        self.removeObservers()
 //    }
 //     MARK: actions
-    func refreashControlAction(){
+    @objc func refreshControlAction(sender:AnyObject){
+        self.startRefreshControl()
         self.cancelSearching()
-        self.collectionView?.reloadData()
+        model.getRandom()
         self.refreshControl?.endRefreshing()
     }
     
@@ -226,7 +233,7 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
         if (self.refreshControl == nil) {
             self.refreshControl            = UIRefreshControl()
             self.refreshControl?.tintColor = UIColor.white
-            self.refreshControl?.addTarget(self, action: Selector(("refreashControlAction")), for: UIControl.Event.valueChanged)
+            self.refreshControl?.addTarget(self, action: #selector(refreshControlAction(sender:)), for: UIControl.Event.valueChanged)
         }
         if !self.refreshControl!.isDescendant(of: self.collectionView!) {
             self.collectionView!.addSubview(self.refreshControl!)

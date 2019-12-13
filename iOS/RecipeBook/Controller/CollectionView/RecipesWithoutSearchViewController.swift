@@ -17,7 +17,7 @@ private let reuseIdentifier = "RecipeCell"
 
 class RecipesWithoutSearchViewController: UIViewController ,UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UIGestureRecognizerDelegate{
     
-    let model = RecipesModel.shared
+    let model = RecipesViewModel.shared
     var observers = [NSKeyValueObservation]()
     var dataSource: [Recipe] = []
     

@@ -11,18 +11,18 @@ import JJFloatingActionButton
 
 class NavigationViewController: UINavigationController {
     private let actionButton = JJFloatingActionButton()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         actionButton.buttonColor = #colorLiteral(red: 1, green: 0.768627451, blue: 0.007843137255, alpha: 1)
         actionButton.buttonImageColor = UIColor.white
         actionButton.tintColor = UIColor.white
-        actionButton.addItem(title: "Timer", image: #imageLiteral(resourceName: "timer.png")) { item in
+        actionButton.addItem(title: "Timer", image: #imageLiteral(resourceName: "example(1)")) { item in
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let timerVC = storyboard.instantiateViewController(withIdentifier: "SetTimer") as! TimerPopUpViewController
             
             self.present(timerVC, animated: true, completion: nil)
+            
         }
         
         actionButton.display(inViewController: self)
