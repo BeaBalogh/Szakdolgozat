@@ -17,7 +17,7 @@ class FavoritesViewController: RecipesWithoutSearchViewController {
  
     override func observeModel() {
         self.observers = [
-            model.observe(\RecipesViewModel.savedRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipeListLogic.savedRecipes, options: [.initial]) { (model, change) in
                 var list: [Recipe] = []
                 for item in model.savedRecipes{
                     if(self.model.isFavorite(id: item.id)){
@@ -40,7 +40,7 @@ class CookedViewController: RecipesWithoutSearchViewController {
     }
     override func observeModel() {
         self.observers = [
-            model.observe(\RecipesViewModel.savedRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipeListLogic.savedRecipes, options: [.initial]) { (model, change) in
                 var list: [Recipe] = []
                 for item in model.savedRecipes{
                     if(self.model.isCooked(id: item.id)){
@@ -64,7 +64,7 @@ class MyRecipesViewController: RecipesWithoutSearchViewController {
     }
     override func observeModel() {
         self.observers = [
-            model.observe(\RecipesViewModel.savedRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipeListLogic.savedRecipes, options: [.initial]) { (model, change) in
                 var list: [Recipe] = []
                 for item in model.savedRecipes{
                     if(self.model.isMyRecipe(id: item.id)){

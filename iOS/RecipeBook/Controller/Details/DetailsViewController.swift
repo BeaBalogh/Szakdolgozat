@@ -14,7 +14,7 @@ class DetailsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var ingredientsKeys: [String] = []
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
     let actionButton = JJFloatingActionButton()
-    let model = RecipesViewModel.shared
+    let model = RecipeListLogic.shared
     
     @IBOutlet weak var directionsTextView: ContentSizedTextView!
     @IBOutlet weak var ingredientsTable: ContentSizedTableView!

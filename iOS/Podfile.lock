@@ -10,7 +10,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - DynamicBlurView (4.0.0)
   - Firebase/Analytics (6.12.0):
     - Firebase/Core
   - Firebase/Auth (6.12.0):
@@ -143,8 +142,6 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - PopupDialog (1.1.1):
-    - DynamicBlurView (~> 4.0)
   - Protobuf (3.10.0)
   - ReachabilitySwift (5.0.0)
   - SideMenuSwift (2.0.3)
@@ -159,7 +156,6 @@ DEPENDENCIES:
   - GrowingTextView (= 0.7.1)
   - HCSStarRatingView (~> 1.5)
   - JJFloatingActionButton
-  - PopupDialog (~> 1.1)
   - ReachabilitySwift
   - SideMenuSwift
 
@@ -167,7 +163,6 @@ SPEC REPOS:
   trunk:
     - AppAuth
     - BoringSSL-GRPC
-    - DynamicBlurView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -192,7 +187,6 @@ SPEC REPOS:
     - JJFloatingActionButton
     - leveldb-library
     - nanopb
-    - PopupDialog
     - Protobuf
     - ReachabilitySwift
     - SideMenuSwift
@@ -200,7 +194,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  DynamicBlurView: ccf9acd2b20c883cc2c72e3524a04d8d3ee20533
   Firebase: da031bc7012374e3bed17a6731b89327b29863b9
   FirebaseAnalytics: 4e53a7eb7b76bc703c4d9239bc964545e9b23361
   FirebaseAuth: b401a012cc33b04df3b52bb308b04e8766f2693e
@@ -225,11 +218,10 @@ SPEC CHECKSUMS:
   JJFloatingActionButton: 26805f87c7e9f68c6a91bd9f3f09c2e6b904a84f
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SideMenuSwift: 5c2b1496544ce3f1f08f4dddf4810eaac49f543d
 
-PODFILE CHECKSUM: 5395403ce320349f41980182d74ae6a104f2f0ec
+PODFILE CHECKSUM: 93ec7ba0a300bac6f5b8fae6dfeeed745594f288
 
 COCOAPODS: 1.8.4

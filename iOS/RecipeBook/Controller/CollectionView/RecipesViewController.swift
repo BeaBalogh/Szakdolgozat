@@ -24,7 +24,7 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
             sideMenuController?.revealMenu()
     }
     
-    let model = RecipesViewModel.shared
+    let model = RecipeListLogic.shared
     var observers = [NSKeyValueObservation]()
     
     var dataSource: [Recipe] = []
@@ -53,13 +53,13 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
     
     func observeModel() {
         self.observers = [
-            model.observe(\RecipesViewModel.randomRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipeListLogic.randomRecipes, options: [.initial]) { (model, change) in
                 self.dataSource = model.randomRecipes
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             },
-            model.observe(\RecipesViewModel.searchRecipes, options: [.initial]) { (model, change) in
+            model.observe(\RecipeListLogic.searchRecipes, options: [.initial]) { (model, change) in
                 self.dataSourceForSearchResult = model.searchRecipes
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -89,10 +89,7 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
         }
     }
     
-//    deinit{
-//        self.removeObservers()
-//    }
-//     MARK: actions
+//     MARK: Actions
     @objc func refreshControlAction(sender:AnyObject){
         self.startRefreshControl()
         self.cancelSearching()
@@ -177,14 +174,12 @@ class RecipesViewController: UIViewController ,UICollectionViewDataSource,UIColl
         }
         cell.nameLabel.text = recipe.name
         cell.categoryLabel.text = recipe.category
-
-        
+        cell.nameLabel.numberOfLines = 3
         if let imageData = try? Data(contentsOf: URL(string: recipe.imgURL)!){
             if let image = UIImage(data: imageData){
                     cell.mealImage.image = image.resize(image: image, targetSize: CGRect(x: 0, y: 0, width: 180, height: 180).size)
             }
         }
-
         return cell
     }
 

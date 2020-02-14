@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailsTabViewController: UITabBarController {
-    let model = RecipesViewModel.shared
+    let model = RecipeListLogic.shared
     var recipe:Recipe = Recipe("")
     @IBOutlet weak var favButton: UIBarButtonItem!
     @IBAction func shareRecipe(_ sender: UIBarButtonItem) {

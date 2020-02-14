@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DD6B4D806C886D1C1A70BE7B /* Pods_RecipeBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7B1A2F04DE9CB3EA20A222 /* Pods_RecipeBook.framework */; };
 		EE5FDB5523A097BE00AF5C4D /* NewIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5FDB5423A097BE00AF5C4D /* NewIngredientTableViewCell.swift */; };
-		EE80EF6B239356FD00BFC216 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF3D239356FD00BFC216 /* 1.mp3 */; };
 		EE80EF6E239356FD00BFC216 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF40239356FD00BFC216 /* Assets.xcassets */; };
 		EE80EF6F239356FD00BFC216 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE80EF41239356FD00BFC216 /* GoogleService-Info.plist */; };
 		EE80EF72239356FD00BFC216 /* TimerPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE80EF47239356FD00BFC216 /* TimerPopUpViewController.swift */; };
@@ -44,7 +43,7 @@
 		EED2800D239C832700DC6D72 /* Recipes.plist in Resources */ = {isa = PBXBuildFile; fileRef = EED2800C239C832700DC6D72 /* Recipes.plist */; };
 		EEE644E92394752600F5D575 /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE644E82394752600F5D575 /* PersistentService.swift */; };
 		EEE644FA23955EF900F5D575 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE644F923955EF900F5D575 /* Responses.swift */; };
-		EEE645022397104B00F5D575 /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE645012397104B00F5D575 /* RecipesViewModel.swift */; };
+		EEE645022397104B00F5D575 /* RecipeListsLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE645012397104B00F5D575 /* RecipeListsLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +51,6 @@
 		9F3DE273D6FC6F995875E290 /* Pods-RecipeBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipeBook.debug.xcconfig"; path = "Target Support Files/Pods-RecipeBook/Pods-RecipeBook.debug.xcconfig"; sourceTree = "<group>"; };
 		EA7B1A2F04DE9CB3EA20A222 /* Pods_RecipeBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecipeBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5FDB5423A097BE00AF5C4D /* NewIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIngredientTableViewCell.swift; sourceTree = "<group>"; };
-		EE80EF3D239356FD00BFC216 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		EE80EF40239356FD00BFC216 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE80EF41239356FD00BFC216 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EE80EF47239356FD00BFC216 /* TimerPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerPopUpViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +87,7 @@
 		EED2800C239C832700DC6D72 /* Recipes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Recipes.plist; path = Storyboard/Recipes.plist; sourceTree = "<group>"; };
 		EEE644E82394752600F5D575 /* PersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
 		EEE644F923955EF900F5D575 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
-		EEE645012397104B00F5D575 /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
+		EEE645012397104B00F5D575 /* RecipeListsLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListsLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,20 +123,17 @@
 			isa = PBXGroup;
 			children = (
 				EE80EF64239356FD00BFC216 /* AppDelegate.swift */,
-				EE80EF5D239356FD00BFC216 /* CountdownTimer.swift */,
-				EE80EF5E239356FD00BFC216 /* NotificationService.swift */,
-				EE80EF65239356FD00BFC216 /* AlertService.swift */,
 				EEC1F5E72399CC370012647E /* Extensions.swift */,
-				EED2800C239C832700DC6D72 /* Recipes.plist */,
-				EEE644F823955ECF00F5D575 /* Model */,
-				EEE644F52394990E00F5D575 /* DataManager */,
+				EEFA094A23F5462A0043210A /* Components */,
+				EEFA094923F545200043210A /* Services */,
+				EEE644F823955ECF00F5D575 /* Etnitites */,
 				EE80EF8F2393575100BFC216 /* Storyboard */,
 				EE80EF44239356FD00BFC216 /* Controller */,
 				EE80EF60239356FD00BFC216 /* View */,
 				EE80EF40239356FD00BFC216 /* Assets.xcassets */,
-				EE80EF3D239356FD00BFC216 /* 1.mp3 */,
 				EE80EF41239356FD00BFC216 /* GoogleService-Info.plist */,
 				EE80EF66239356FD00BFC216 /* alarm_clock.mp3 */,
+				EED2800C239C832700DC6D72 /* Recipes.plist */,
 				EE80EF67239356FD00BFC216 /* Info.plist */,
 			);
 			path = RecipeBook;
@@ -237,23 +232,33 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		EEE644F52394990E00F5D575 /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				EEE644E82394752600F5D575 /* PersistentService.swift */,
-				EEE645012397104B00F5D575 /* RecipesViewModel.swift */,
-				EEC1F5E5239869360012647E /* FirebaseService.swift */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
-		EEE644F823955ECF00F5D575 /* Model */ = {
+		EEE644F823955ECF00F5D575 /* Etnitites */ = {
 			isa = PBXGroup;
 			children = (
 				EE80EF5C239356FD00BFC216 /* Atoms.swift */,
 				EEE644F923955EF900F5D575 /* Responses.swift */,
 			);
-			path = Model;
+			path = Etnitites;
+			sourceTree = "<group>";
+		};
+		EEFA094923F545200043210A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EE80EF65239356FD00BFC216 /* AlertService.swift */,
+				EEE644E82394752600F5D575 /* PersistentService.swift */,
+				EEC1F5E5239869360012647E /* FirebaseService.swift */,
+				EE80EF5E239356FD00BFC216 /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EEFA094A23F5462A0043210A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				EEE645012397104B00F5D575 /* RecipeListsLogic.swift */,
+				EE80EF5D239356FD00BFC216 /* CountdownTimer.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,7 +330,6 @@
 				EED2800D239C832700DC6D72 /* Recipes.plist in Resources */,
 				EE80EF82239356FD00BFC216 /* Login.storyboard in Resources */,
 				EE80EF9423935A1D00BFC216 /* Main.storyboard in Resources */,
-				EE80EF6B239356FD00BFC216 /* 1.mp3 in Resources */,
 				EE80EF9523935A1D00BFC216 /* LaunchScreen.storyboard in Resources */,
 				EE80EF6E239356FD00BFC216 /* Assets.xcassets in Resources */,
 				EE80EF6F239356FD00BFC216 /* GoogleService-Info.plist in Resources */,
@@ -409,7 +413,7 @@
 				EE80EF7D239356FD00BFC216 /* LaunchViewController.swift in Sources */,
 				EE80EF84239356FD00BFC216 /* CountdownTimer.swift in Sources */,
 				EE80EF7F239356FD00BFC216 /* MainViewController.swift in Sources */,
-				EEE645022397104B00F5D575 /* RecipesViewModel.swift in Sources */,
+				EEE645022397104B00F5D575 /* RecipeListsLogic.swift in Sources */,
 				EE80EF74239356FD00BFC216 /* RecipesViewController.swift in Sources */,
 				EEC1F5EC239AAD9B0012647E /* ListsViewController.swift in Sources */,
 				EE80EF88239356FD00BFC216 /* IngredientsTableViewCell.swift in Sources */,

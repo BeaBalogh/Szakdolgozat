@@ -9,8 +9,8 @@
 import Foundation
 import Reachability
 
-class RecipesViewModel: NSObject{
-    static public let shared = RecipesViewModel()
+class RecipeListLogic: NSObject{
+    static public let shared = RecipeListLogic()
     @objc dynamic var randomRecipes: [Recipe] = []
     @objc dynamic var searchRecipes: [Recipe] = []
     @objc dynamic var savedRecipes: [Recipe] = []
