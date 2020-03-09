@@ -1,5 +1,5 @@
 # Szakdolgozat - RecipeBook 
-Az Android és iOS platformok összehasonlítása egy alkalmazás fejlesztésén keresztül
+Az Android (Kotlin) és iOS (Swift) platformok összehasonlítása egy alkalmazás fejlesztésén keresztül
 
 Az alkalmazás tervezésekor a funkcióinak kiválasztásában a fő szempont mindig az volt, hogy a megvalósítás során a két platform különbözősége előjöjjön.
 Ahhoz, hogy az alkalmazás működjön, adatokra volt szükség. Ehhez egy ingyenesen elérhető API-t kerestem. Több lehetőséget is találtam melyek receptekkel szolgáltak, de végül a választásom a TheMealDB API-ra esett.
