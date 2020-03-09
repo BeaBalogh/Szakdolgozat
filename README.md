@@ -1,4 +1,4 @@
-# Szakdolgozat - RecipeBook (2020, BSC)
+# Szakdolgozat - RecipeBook (2019, BSC)
 Az Android (Kotlin) és iOS (Swift) platformok összehasonlítása egy alkalmazás fejlesztésén keresztül
 
 Az alkalmazás tervezésekor a funkcióinak kiválasztásában a fő szempont mindig az volt, hogy a megvalósítás során a két platform különbözősége előjöjjön.
