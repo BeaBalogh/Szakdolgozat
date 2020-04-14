@@ -1,7 +1,7 @@
 package hu.bme.aut.android.dataManager.network.helper
 
-import hu.bme.aut.android.model.Meal
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Meal
+import hu.bme.aut.android.entities.Recipe
 
 class RecipeMapper {
     companion object {

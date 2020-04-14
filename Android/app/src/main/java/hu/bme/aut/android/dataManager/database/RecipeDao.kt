@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Recipe
 
 @Dao
 interface RecipeDao {

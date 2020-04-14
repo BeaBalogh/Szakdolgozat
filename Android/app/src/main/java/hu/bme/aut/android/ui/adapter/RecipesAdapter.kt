@@ -1,8 +1,6 @@
 package hu.bme.aut.android.ui.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import hu.bme.aut.android.ui.activity.MainActivity
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Recipe
 import hu.bme.aut.android.dataManager.network.RecipeService
 import kotlinx.android.synthetic.main.row_recipe.view.*
 

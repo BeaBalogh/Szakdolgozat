@@ -1,11 +1,9 @@
 package hu.bme.aut.android.ui.fragment
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -15,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.app.ActivityCompat
 import androidx.core.net.toUri
 import androidx.core.view.children
 import androidx.core.view.isVisible
@@ -23,11 +20,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.firebase.firestore.DocumentSnapshot
 import hu.bme.aut.android.R
 import hu.bme.aut.android.ui.activity.MainActivity
 import hu.bme.aut.android.ui.adapter.CommentsAdapter
-import hu.bme.aut.android.model.Comment
+import hu.bme.aut.android.entities.Comment
 import hu.bme.aut.android.dataManager.network.RecipeService
 import hu.bme.aut.android.reciver.ConnectivityReceiver
 import kotlinx.android.synthetic.main.view_new_comment.*

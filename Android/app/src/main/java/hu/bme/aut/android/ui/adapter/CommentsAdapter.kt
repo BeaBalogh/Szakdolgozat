@@ -13,11 +13,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import hu.bme.aut.android.R
-import hu.bme.aut.android.model.Comment
+import hu.bme.aut.android.entities.Comment
 import kotlinx.android.synthetic.main.row_comment.view.*
 import kotlinx.android.synthetic.main.row_comment.view.ivMealNewComment
 import kotlinx.android.synthetic.main.row_comment.view.tvUserNameNewComment
-import kotlinx.android.synthetic.main.view_new_comment.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 

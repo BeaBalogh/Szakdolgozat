@@ -1,4 +1,4 @@
-package hu.bme.aut.android.model
+package hu.bme.aut.android.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

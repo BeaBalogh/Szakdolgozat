@@ -7,7 +7,7 @@ import hu.bme.aut.android.ui.activity.MainActivity
 import hu.bme.aut.android.dataManager.database.RecipeDatabase
 import hu.bme.aut.android.ui.fragment.RecipeListFragment
 import hu.bme.aut.android.ui.fragment.SharedRecipeViewModel
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Recipe
 import hu.bme.aut.android.dataManager.network.RecipeInteractor
 import hu.bme.aut.android.dataManager.network.RecipeService
 import java.net.URL

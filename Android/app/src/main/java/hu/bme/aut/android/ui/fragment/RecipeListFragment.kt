@@ -1,7 +1,6 @@
 package hu.bme.aut.android.ui.fragment
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import hu.bme.aut.android.R
 import hu.bme.aut.android.dataManager.DataManager
-import hu.bme.aut.android.dataManager.network.RecipeService
-import hu.bme.aut.android.model.Categories
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Categories
+import hu.bme.aut.android.entities.Recipe
 import hu.bme.aut.android.ui.activity.MainActivity
 import hu.bme.aut.android.ui.adapter.RecipesAdapter
 import kotlinx.android.synthetic.main.app_bar_main.*

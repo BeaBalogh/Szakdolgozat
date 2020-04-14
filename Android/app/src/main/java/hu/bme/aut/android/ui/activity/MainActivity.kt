@@ -36,7 +36,7 @@ import androidx.room.Room
 import hu.bme.aut.android.dataManager.DataManager
 import hu.bme.aut.android.dataManager.database.RecipeDatabase
 import hu.bme.aut.android.ui.fragment.SharedRecipeViewModel
-import hu.bme.aut.android.model.User
+import hu.bme.aut.android.entities.User
 import hu.bme.aut.android.dataManager.network.RecipeService
 import hu.bme.aut.android.reciver.ConnectivityReceiver
 

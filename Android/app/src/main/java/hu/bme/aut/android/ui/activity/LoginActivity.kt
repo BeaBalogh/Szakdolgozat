@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -77,6 +78,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
                 Log.w(TAG, "Google sign in failed", e)
+                Toast.makeText(this, "Gooogle Auth failed", Toast.LENGTH_LONG)
 
             }
         }

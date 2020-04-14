@@ -2,9 +2,9 @@ package hu.bme.aut.android.ui.fragment
 
 import androidx.lifecycle.ViewModel
 import hu.bme.aut.android.dataManager.DataManager
-import hu.bme.aut.android.model.Comment
-import hu.bme.aut.android.model.Recipe
-import hu.bme.aut.android.model.User
+import hu.bme.aut.android.entities.Comment
+import hu.bme.aut.android.entities.Recipe
+import hu.bme.aut.android.entities.User
 
 
 class SharedRecipeViewModel : ViewModel() {

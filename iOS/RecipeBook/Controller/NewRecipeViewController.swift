@@ -35,6 +35,7 @@ class NewRecipeViewController: UIViewController,UITableViewDelegate, UITableView
         mealImageView.layer.borderWidth = 1
         mealImageView.layer.borderColor =  UIColor.lightGray.cgColor
         mealImageView.layer.masksToBounds = false
+    
         // Do any additional setup after loading the view.
     }
     

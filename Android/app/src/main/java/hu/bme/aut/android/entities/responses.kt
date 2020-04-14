@@ -1,4 +1,4 @@
-package hu.bme.aut.android.model
+package hu.bme.aut.android.entities
 
 data class Meals(
     val meals: List<Meal>

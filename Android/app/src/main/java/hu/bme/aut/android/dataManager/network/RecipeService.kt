@@ -8,9 +8,9 @@ import com.google.firebase.firestore.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
-import hu.bme.aut.android.model.Comment
-import hu.bme.aut.android.model.Recipe
-import hu.bme.aut.android.model.User
+import hu.bme.aut.android.entities.Comment
+import hu.bme.aut.android.entities.Recipe
+import hu.bme.aut.android.entities.User
 
 
 class RecipeService {

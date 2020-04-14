@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.github.dhaval2404.imagepicker.ImagePicker
 import hu.bme.aut.android.R
-import hu.bme.aut.android.model.Categories
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Categories
+import hu.bme.aut.android.entities.Recipe
 import hu.bme.aut.android.dataManager.network.RecipeService
 import kotlinx.android.synthetic.main.fragment_new_recipe.view.*
 import kotlinx.android.synthetic.main.row_new_ingredient.view.*

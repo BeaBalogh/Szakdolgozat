@@ -3,8 +3,8 @@ package hu.bme.aut.android.dataManager.network
 import android.os.Handler
 import com.google.gson.GsonBuilder
 import hu.bme.aut.android.dataManager.network.helper.RecipeMapper
-import hu.bme.aut.android.model.Meals
-import hu.bme.aut.android.model.Recipe
+import hu.bme.aut.android.entities.Meals
+import hu.bme.aut.android.entities.Recipe
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
